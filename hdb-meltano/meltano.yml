@@ -4,3 +4,31 @@ environments:
 - name: dev
 - name: staging
 - name: prod
+plugins:
+  extractors:
+  - name: tap-duckdb
+    namespace: tap_duckdb
+    pip_url: git+https://github.com/MeltanoLabs/tap-duckdb.git setuptools<82
+    executable: tap-duckdb
+    capabilities:
+    - catalog
+    - discover
+    - state
+    settings:
+    - name: path
+      kind: string
+    config:
+      path: $TAP_DUCKDB_PATH
+  loaders:
+  - name: target-bigquery
+    variant: z3z1ma
+    pip_url: git+https://github.com/z3z1ma/target-bigquery.git setuptools<80
+    config:
+      batch_size: 104857600
+      credentials_path: $TARGET_BIGQUERY_CREDENTIALS_PATH
+      dataset: hdb_raw
+      denormalized: true
+      flattening_enabled: true
+      flattening_max_depth: 1
+      method: batch_job
+      project: hdb-resale-497709

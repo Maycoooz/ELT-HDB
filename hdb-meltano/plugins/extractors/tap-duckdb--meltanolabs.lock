@@ -1,0 +1,23 @@
+{
+  "plugin_type": "extractors",
+  "name": "tap-duckdb",
+  "namespace": "tap_duckdb",
+  "variant": "meltanolabs",
+  "label": "DuckDB",
+  "docs": "https://hub.meltano.com/extractors/tap-duckdb--meltanolabs",
+  "repo": "https://github.com/MeltanoLabs/tap-duckdb",
+  "pip_url": "git+https://github.com/MeltanoLabs/tap-duckdb.git setuptools<82",
+  "capabilities": [
+    "catalog",
+    "discover",
+    "state"
+  ],
+  "settings": [
+    {
+      "name": "path",
+      "kind": "string",
+      "label": "Path",
+      "description": "Path to .duckdb file"
+    }
+  ]
+}

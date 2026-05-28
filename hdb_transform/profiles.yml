@@ -1,0 +1,14 @@
+hdb_transform:
+  outputs:
+    dev:
+      dataset: hdb_transform
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: /Users/mudkip/Desktop/hdb-resale-497709-d35abae8ec16.json # change to your own keyfile path
+      location: US
+      method: service-account
+      priority: interactive
+      project: hdb-resale-497709
+      threads: 1
+      type: bigquery
+  target: dev

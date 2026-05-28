@@ -31,4 +31,4 @@ plugins:
       flattening_enabled: true
       flattening_max_depth: 1
       method: batch_job
-      project: hdb-resale-497709
+      project: hdb-resale-497709 # use your own gcp project id, unless you are in my group

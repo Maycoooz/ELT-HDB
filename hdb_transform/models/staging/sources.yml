@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: hdb_raw
+    database: hdb-resale-497709
+    schema: hdb_raw
+    tables:
+      - name: main_hdb_resale

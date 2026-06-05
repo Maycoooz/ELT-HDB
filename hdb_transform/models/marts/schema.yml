@@ -1,0 +1,111 @@
+version: 2
+
+models:
+  - name: dim_flat
+    description: "Dimension table for flat"
+    columns:
+      - name: flat_id
+        description: "The surrogate key for this table"
+        tests:
+          - unique
+          - not_null
+
+      - name: flat_type
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+
+      - name: flat_model
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+
+  - name: dim_location
+    description: "Dimension table for location"
+    columns:
+      - name: location_id
+        description: "The surrogate key for this table"
+        tests:
+          - unique
+          - not_null
+
+      - name: town
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+
+      - name: block
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+
+      - name: street_name
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+
+  - name: fact_sales
+    description: "Fact table for sales"
+    columns:
+      - name: resale_id
+        description: "Surrogate key for this table"
+        tests:
+          - unique
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+
+      - name: flat_id
+        description: "The foreign key to the flat dimension table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_flat')
+              field: flat_id
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+
+      - name: location_id
+        description: "The foreign key to the location dimension table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_location')
+              field: location_id
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+
+      - name: year
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: int64
+
+      - name: month
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: int64
+
+      - name: storey_range
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+
+      - name: floor_area_sqm
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: numeric
+
+      - name: lease_commence_date
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: int64
+
+      - name: remaining_lease
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: string
+              
+      - name: resale_price
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: numeric
